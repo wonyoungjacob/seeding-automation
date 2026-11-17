@@ -1,0 +1,22 @@
+# 비밀 값 (액세스 토큰 등) — 절대 커밋하지 않음
+.env
+.env.*
+!.env.example
+*token*.txt
+
+# 실행 결과물 (실제 계정 데이터가 들어갈 수 있음)
+output/
+data/private/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# OS / 편집기
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
