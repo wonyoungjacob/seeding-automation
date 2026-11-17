@@ -1,0 +1,78 @@
+{
+  "_설명": "토큰 없이 돌려 보기 위한 가상의 계정 데이터입니다. 실제 계정이 아니며, 메일 주소는 모두 예시용 도메인(example.com)입니다. 실제 API(Business Discovery)가 돌려주는 항목과 같은 모양으로 만들었습니다.",
+  "profiles": {
+    "sample_homesool_diary": {
+      "username": "sample_homesool_diary",
+      "biography": "홈술 기록 🍶\n협업 문의 homesool.diary@example.com",
+      "website": "",
+      "followers_count": 18400,
+      "media_count": 412
+    },
+    "sample_makgeolli_note": {
+      "username": "sample_makgeolli_note",
+      "biography": "전통주 리뷰\n문의는 메일로 makgeolli.note@example.co.kr입니다",
+      "website": "https://blog.example.com/makgeolli",
+      "followers_count": 9200,
+      "media_count": 288
+    },
+    "sample_table_for_two": {
+      "username": "sample_table_for_two",
+      "biography": "요리와 술 페어링\nbiz: table.for.two 골뱅이 example 닷컴",
+      "website": "",
+      "followers_count": 31500,
+      "media_count": 640
+    },
+    "sample_weekend_camper": {
+      "username": "sample_weekend_camper",
+      "biography": "캠핑 / 맛집\ncontact: weekend.camper (at) example (dot) com",
+      "website": "",
+      "followers_count": 12700,
+      "media_count": 351
+    },
+    "sample_foodie_jeju": {
+      "username": "sample_foodie_jeju",
+      "biography": "제주 맛집\n메일 foodie.jeju @ example . com",
+      "website": "",
+      "followers_count": 7600,
+      "media_count": 203
+    },
+    "sample_two_contacts": {
+      "username": "sample_two_contacts",
+      "biography": "광고 ad.two@example.com / 그 외 hello.two@example.com",
+      "website": "",
+      "followers_count": 54000,
+      "media_count": 980
+    },
+    "sample_brunch_seoul": {
+      "username": "sample_brunch_seoul",
+      "biography": "서울 브런치 맛집 🥐\n협찬·광고 문의는 DM 주세요",
+      "website": "",
+      "followers_count": 22300,
+      "media_count": 517
+    },
+    "sample_wine_and_rice": {
+      "username": "sample_wine_and_rice",
+      "biography": "술 좋아하는 직장인\n문의는 아래 링크",
+      "website": "https://linktr.ee/sample_wine_and_rice",
+      "followers_count": 15800,
+      "media_count": 330
+    },
+    "sample_cocktail_lab": {
+      "username": "sample_cocktail_lab",
+      "biography": "칵테일 레시피\ncollab with @sample.brand.kr 🍸",
+      "website": "",
+      "followers_count": 41200,
+      "media_count": 722
+    },
+    "sample_big_creator": {
+      "username": "sample_big_creator",
+      "biography": "먹고 마시는 일상",
+      "website": "",
+      "followers_count": 126000,
+      "media_count": 1540
+    },
+    "sample_private_person": {
+      "_not_found": true
+    }
+  }
+}
