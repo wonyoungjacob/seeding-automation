@@ -1,5 +1,19 @@
 # 인스타그램 시딩 자동화 — 메일 수집기와 DM 전송 큐
 
+**문제** · 이미 찾은 인스타그램 계정에서 메일 주소를 모으고 첫 DM을 일괄 발송하는 일이 막혀 있습니다.  
+**해결** · 소개글의 메일은 자동으로 CSV에 모읍니다. 메일이 없는 계정은 DM 문안과 링크를 준비하고 담당자가 확인해 전송합니다.  
+**실행 비용 0원** · 샘플은 계정·토큰 없이 실행할 수 있습니다. [과제 배경](MASTER.md) · [AI 사용 내역](AI_USAGE.md)  
+**바로 해 보기** · Python이 있는 PC에서 **Code → Download ZIP → 압축 풀기** 후 `collect_emails.py`가 보이는 폴더에서 터미널을 열고 두 줄을 실행하세요.
+
+```sh
+python collect_emails.py --sample
+python make_dm_queue.py --sample
+```
+
+Windows에서 `python` 명령을 찾지 못하고 `py`가 설치되어 있다면 두 줄의 `python`을 `py`로 바꾸세요.
+
+**결과 확인** · `output/sample_emails_mail.csv`를 열면 메일 대상 6명, `output/sample_dm_queue.html`을 더블클릭하면 DM 대상 4명의 문안이 보입니다. 나머지 1명은 수동 확인입니다. 샘플은 아무 메시지도 보내지 않습니다.
+
 인스타그램 시딩에서 손으로 하던 두 가지, **이미 찾은 계정의 메일 주소 수집**과 **DM 발송 준비**를 자동화하는 파이썬 도구입니다. 파이썬만 있으면 돌아가고, 따로 설치할 것이 없습니다.
 
 과제 배경과 문제 정의는 [MASTER.md](MASTER.md)에 있습니다.
@@ -22,7 +36,7 @@ flowchart LR
 
 ## 1분 만에 돌려 보기
 
-토큰도 설치도 필요 없습니다. 가상의 샘플 계정 11개로 전체 흐름이 돌아갑니다.
+Python 외에 추가 설치나 토큰은 필요 없습니다. 가상의 샘플 계정 11개로 전체 흐름이 돌아갑니다.
 
 ```
 git clone https://github.com/wonyoungjacob/seeding-automation.git
@@ -31,7 +45,7 @@ python collect_emails.py --sample
 python make_dm_queue.py --sample
 ```
 
-첫 명령의 결과는 이렇게 나옵니다.
+메일 수집 명령의 결과는 이렇게 나옵니다.
 
 ```
 결과
@@ -61,16 +75,18 @@ Meta가 화면 구성을 자주 바꾸므로 메뉴 이름은 다를 수 있습�
 ### 실행
 
 ```
-copy .env.example .env          (맥은 cp .env.example .env)
+cp .env.example .env
 ```
 
 `.env` 파일을 열어 `IG_ACCESS_TOKEN=` 뒤에 토큰을 붙여넣고 저장합니다. 그다음 순서대로 실행합니다.
 
 ```
-python check_setup.py                 연결 확인. 계정 ID를 찾아 .env에 저장합니다
-python collect_emails.py 계정목록.csv  메일 수집
-python make_dm_queue.py               DM 전송 큐 만들기
+python check_setup.py
+python collect_emails.py 계정목록.csv
+python make_dm_queue.py
 ```
+
+페이지 목록이 비어도 본인 인스타그램 숫자 ID를 알고 있다면 `.env`의 `IG_USER_ID`에 입력하고 두 번째 명령부터 실행하세요. 이번 실제 조회도 이 방법으로 확인했습니다.
 
 **계정 목록 파일**은 한 줄에 계정 하나씩 적으면 됩니다. `abc`, `@abc`, `https://www.instagram.com/abc/` 모두 됩니다. 엑셀에서 CSV로 저장한 파일도 그대로 읽습니다. 열이 여러 개면 `계정` 또는 `username` 열을 쓰고, 그런 열이 없으면 첫 번째 열을 씁니다.
 
@@ -92,7 +108,7 @@ python make_dm_queue.py               DM 전송 큐 만들기
 1. `output/dm_queue.html`을 브라우저로 엽니다. 팔로워가 많은 순으로 하루치(기본 20명)가 나옵니다.
 2. **복사하고 프로필 열기**를 누르면 문안이 복사되고 그 계정의 프로필이 새 탭에 열립니다. 휴대폰에서는 **복사하고 DM 열기**를 누르면 DM 창이 바로 열립니다.
 3. 붙여넣고 전송합니다. 문안은 페이지에서 미리 고칠 수 있습니다.
-4. 다 보냈으면 **보낸 목록 내려받기**를 누르고, 내려받은 파일을 연락 기록에 합칩니다.
+4. 링크를 열면 ‘보냄’이 체크됩니다. 실제로 보내지 않은 계정은 체크를 해제하세요. 다 보냈으면 **보낸 목록 내려받기**를 누르고, 내려받은 파일을 연락 기록에 합칩니다.
 
 ```
 python make_dm_queue.py --import-sent sent_2026-11-18.csv
@@ -111,7 +127,7 @@ python make_dm_queue.py --import-sent sent_2026-11-18.csv
 | B | 대상 선정, 문안 작성, 중복 제외, 하루 발송량, DM 창 열기, 기록 | ✅ | |
 | B | DM 전송 | ❌ | 공식 API는 상대가 먼저 메시지를 보내야만 대화를 열 수 있음 |
 
-**DM 전송까지 자동화하지 않은 이유.** 프로그램이나 AI가 브라우저 화면을 대신 조작해 보내는 방법은 기술적으로는 되지만 인스타그램 약관이 금지하는 비공식 자동화이고, 걸리면 브랜드 계정이 제한됩니다. AI가 화면을 보며 조작하는 방식은 비용도 큽니다. DM 100건에 약 1.3만~7만 원으로 추정되고, 건당 40~60초가 걸려 사람이 붙여넣는 것(15~20초)보다 느립니다. 그래서 전송 한 번만 사람에게 남기고 그 앞을 전부 자동화했습니다.
+공식 API가 첫 DM 자동 발송을 막고 있어, 담당자가 마지막에 직접 전송합니다.
 
 ## 비용
 
