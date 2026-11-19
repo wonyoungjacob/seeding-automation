@@ -70,11 +70,17 @@ python make_dm_queue.py --sample
 1. **인스타그램 프로페셔널 계정**(비즈니스 또는 크리에이터)과 **연결된 페이스북 페이지**
 2. **Meta 개발자 앱의 액세스 토큰**. 비용은 없습니다.
    1. [developers.facebook.com](https://developers.facebook.com)에 로그인해 앱을 하나 만듭니다.
-   2. [Graph API 탐색기](https://developers.facebook.com/tools/explorer/)에서 그 앱을 고르고, 권한 네 개를 추가합니다: `pages_show_list`, `pages_read_engagement`, `instagram_basic`, `instagram_manage_insights`
-   3. 토큰을 생성하고, 로그인 창에서 인스타그램 계정과 페이지를 선택합니다.
+   2. [Graph API 탐색기](https://developers.facebook.com/tools/explorer/) 오른쪽 **Meta 앱**에서 방금 만든 앱을 고릅니다. **사용자 또는 페이지 → 사용자 액세스 토큰 받기**를 선택합니다. 권한을 고르는 곳은 그 아래 **Permissions(권한) → 권한 추가**입니다.
+   3. `pages_show_list`, `pages_read_engagement`, `instagram_basic`, `instagram_manage_insights`를 하나씩 검색해 선택합니다. **Generate Access Token**을 누르고 로그인 창에서 연결한 페이지와 인스타그램 계정을 승인합니다.
    4. 단기 사용자 토큰은 수 시간, 장기 사용자 토큰은 통상 약 60일간 유효합니다. [토큰 디버거](https://developers.facebook.com/tools/debug/accesstoken/)에서 실제 만료일을 확인하고, 갱신한 값은 담당자 PC의 .env에 저장합니다.
 
-탐색기에서 바로 토큰을 발급할 수 없다면 앱의 **비즈니스용 Facebook 로그인 → 구성**에서 **사용자 액세스 토큰** 유형으로 구성을 만들고 위 권한을 선택하세요. 권한이 목록에 없으면 앱의 Instagram 이용 사례 → 권한 및 기능에서 먼저 추가합니다. 탐색기의 **Configurations** 탭에서 저장한 구성을 선택하고 토큰을 생성하세요. Meta 화면의 메뉴 이름은 달라질 수 있습니다.
+**처음 열었는데 권한 4개가 다 보이지 않나요?**
+
+1. **목록에 필요한 이름이 없을 때** — 새 탭에서 **내 앱 → 내 앱 이름 → 이용 사례 → Instagram에서 메시지 및 콘텐츠 관리 → 맞춤 설정**으로 들어갑니다. **Facebook 로그인이 포함된 API 설정 → 필수 권한 추가**에서 콘텐츠 권한을 추가합니다. 버튼이 이미 **Go to permissions and features**로 바뀌었다면 그 버튼을 누릅니다.
+2. **메시지 권한만 보일 때** — **권한 및 기능**에서 `instagram_manage_insights`(인사이트 조회)를 검색해 추가합니다. `instagram_manage_messages`는 DM용이라 이 자리에 쓸 수 없습니다. 탐색기 탭을 새로 고치고 같은 앱을 선택한 뒤 **권한 추가**에서 네 이름을 다시 확인합니다.
+3. **사용자 토큰을 눌러도 승인 창이 열리지 않을 때** — 앱 대시보드의 **비즈니스용 Facebook 로그인 → 구성 → 구성 만들기**에서 **사용자 액세스 토큰**을 고르고 네 권한을 선택해 저장합니다. 탐색기의 **Configurations(구성)** 탭에서 저장한 구성을 선택한 뒤 **Generate Access Token**을 누릅니다.
+
+발급 후에는 [토큰 디버거](https://developers.facebook.com/tools/debug/accesstoken/)의 권한 목록에서 네 이름이 모두 있는지 확인합니다. 빠진 권한을 추가했다면 토큰을 다시 발급해 사용하세요. 같은 절차는 [Meta 초기 설정 안내서 PDF](docs/Meta%20초기%20설정%20안내서.pdf) 3~4쪽에도 있습니다.
 
 ### 실행
 
